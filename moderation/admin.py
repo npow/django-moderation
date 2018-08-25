@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
 
 import django
+from django import urls
 from django.contrib import admin
 from django.contrib.contenttypes.models import ContentType
-from django.core import urlresolvers
 from django.forms.models import ModelForm
 from django.utils.translation import ugettext as _
 
@@ -56,7 +56,7 @@ class ModerationAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         # Modified from django.contrib.admin.options.BaseModelAdmin
-        qs = self.model._default_unmoderated_manager.get_queryset()
+        qs = self.model._default_manager.get_queryset()
         ordering = self.get_ordering(request)
         if ordering:
             qs = qs.order_by(*ordering)
@@ -195,11 +195,11 @@ class ModeratedObjectAdmin(admin.ModelAdmin):
 
         content_type = ContentType.objects.get_for_model(changed_obj.__class__)
         try:
-            object_admin_url = urlresolvers.reverse("admin:%s_%s_change" %
+            object_admin_url = urls.reverse("admin:%s_%s_change" %
                                                     (content_type.app_label,
                                                      content_type.model),
                                                     args=(changed_obj.pk,))
-        except urlresolvers.NoReverseMatch:
+        except urls.NoReverseMatch:
             object_admin_url = None
 
         extra_context = {'changes': changes,
