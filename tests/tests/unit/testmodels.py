@@ -438,7 +438,7 @@ class ModerateCustomUserTestCase(ModerateTestCase):
         ModeratedObject.by = models.ForeignKey(
             getattr(settings, 'AUTH_USER_MODEL', 'auth.User'),
             blank=True, null=True, editable=False,
-            related_name='moderated_objects')
+            related_name='moderated_objects', on_delete=models.CASCADE)
 
         self.profile = UserProfileWithCustomUser.objects.create(
             user=self.user,

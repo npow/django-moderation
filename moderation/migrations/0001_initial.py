@@ -29,9 +29,9 @@ class Migration(migrations.Migration):
                 ('moderation_date', models.DateTimeField(null=True, editable=False, blank=True)),
                 ('moderation_reason', models.TextField(null=True, blank=True)),
                 ('changed_object', SerializedObjectField(editable=False)),
-                ('changed_by', models.ForeignKey(related_name='changed_by_set', blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT)),
-                ('content_type', models.ForeignKey(blank=True, editable=False, to='contenttypes.ContentType', null=True, on_delete=models.PROTECT)),
-                ('moderated_by', models.ForeignKey(related_name='moderated_by_set', blank=True, editable=False, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT)),
+                ('changed_by', models.ForeignKey(related_name='changed_by_set', blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
+                ('content_type', models.ForeignKey(blank=True, editable=False, to='contenttypes.ContentType', null=True, on_delete=models.CASCADE)),
+                ('moderated_by', models.ForeignKey(related_name='moderated_by_set', blank=True, editable=False, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ['moderation_status', 'date_created'],

@@ -37,7 +37,7 @@ if not settings.configured and not os.environ.get('DJANGO_SETTINGS_MODULE'):
                 'ENGINE': 'django.db.backends.sqlite3',
             }
         },
-        MIDDLEWARE_CLASSES=(
+        MIDDLEWARE=(
             'django.middleware.common.CommonMiddleware',
             'django.contrib.sessions.middleware.SessionMiddleware',
             'django.contrib.auth.middleware.AuthenticationMiddleware',
